@@ -1,29 +1,42 @@
 <div>
-    <mat-grid-list cols="8" >
-        <mat-grid-tile colspan="7"><h1>Stories Board</h1></mat-grid-tile>
-        <mat-grid-tile><button mat-button><mat-icon>add</mat-icon></button></mat-grid-tile>
-    </mat-grid-list>
 
-    <mat-card class="entry">
-        <mat-grid-list cols="8" rowHeight="6:1">
-            <mat-grid-tile>
-                <mat-icon>keyboard_arrow_up</mat-icon>
-                <mat-icon>keyboard_arrow_down</mat-icon>
-            </mat-grid-tile>
-            <mat-grid-tile>Image</mat-grid-tile>
-            <mat-grid-tile colspan="6">Adventure Story</mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
-    
-    
-    <mat-card class="entry">
-        <mat-grid-list cols="8" rowHeight="6:1">
-            <mat-grid-tile>
-                <mat-icon>keyboard_arrow_up</mat-icon>
-                <mat-icon>keyboard_arrow_down</mat-icon>
-            </mat-grid-tile>
-            <mat-grid-tile>Image</mat-grid-tile>
-            <mat-grid-tile colspan="6">Adventure Story</mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
+    <div class="row form-group">
+        <div class="col-md-12">
+            <mat-table #table [dataSource]="dataSource">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="score">
+                    <mat-header-cell *matHeaderCellDef> Score </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.score}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="author">
+                    <mat-header-cell *matHeaderCellDef> Author </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.author}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="genre">
+                    <mat-header-cell *matHeaderCellDef> Genre </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.genre}} </mat-cell>
+                </ng-container>
+
+                <!-- Color Column -->
+                <ng-container matColumnDef="title">
+                    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 offset-md-9">
+            <button class="btn btn-primary" style="width: 100%" [routerLink]=" ['/newStory'] ">Create</button>
+        </div>
+    </div>
+
 </div>

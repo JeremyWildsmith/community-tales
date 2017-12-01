@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatStepper} from '@angular/material';
 
 import {Story, StoryService} from '../story.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-create-story-page',
@@ -10,7 +11,7 @@ import {Story, StoryService} from '../story.service';
     styleUrls: ['./create-story-page.component.css']
 })
 export class CreateStoryPageComponent implements OnInit {
-    contactEmail: string = "noemail";
+    contactEmail: string = "";
     summary: string = "";
     title: string = "";
     genre: string = "Mystery";
@@ -18,7 +19,7 @@ export class CreateStoryPageComponent implements OnInit {
 
     isLinear = false;
 
-    constructor(private _formBuilder: FormBuilder, private storyService: StoryService) {}
+    constructor(private _formBuilder: FormBuilder, private storyService: StoryService, private router: Router) {}
 
     ngOnInit() {
 
@@ -47,6 +48,10 @@ export class CreateStoryPageComponent implements OnInit {
         story.parent = null;
         story.summary = this.summary;
         
-        this.storyService.saveStory(story).then(()=> {}).catch(()=> {});
+        this.storyService.saveStory(story).then(()=> {
+            this.router.navigateByUrl("/home");
+        }).catch(()=> {
+            alert("Unable to submit story!.");
+        });
     }
 }

@@ -14,6 +14,7 @@ import {MatInputModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {StoryService} from "./story.service";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReadStoryPageComponent } from './read-story-page/read-story-page.component';
 
 const appRoutes: Routes = [
     {path: 'home', component: HomePageComponent},
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
         HomePageComponent,
         ErrorPageNotFoundComponent,
         CreateStoryPageComponent,
+        ReadStoryPageComponent,
     ],
     imports: [
         RouterModule.forRoot(

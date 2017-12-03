@@ -47,6 +47,8 @@ export class CreateStoryPageComponent implements OnInit {
         story.date = Math.round((new Date()).getTime() / 1000);
         story.parent = null;
         story.summary = this.summary;
+        story.page = 1;
+        story.score = 0;
         
         this.storyService.saveStory(story).then(()=> {
             this.router.navigateByUrl("/home");

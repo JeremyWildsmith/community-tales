@@ -1,41 +1,85 @@
 <div>
 
-    <div class="row form-group">
-        <div class="col-md-12">
-            <mat-table #table [dataSource]="dataSource">
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="score">
-                    <mat-header-cell *matHeaderCellDef> Score </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.score}} </mat-cell>
-                </ng-container>
-
-                <!-- Weight Column -->
-                <ng-container matColumnDef="author">
-                    <mat-header-cell *matHeaderCellDef> Author </mat-header-cell>
-                    <mat-cell *matCellDef="let element">{{element.author}} </mat-cell>
-                </ng-container>
-
-                <!-- Weight Column -->
-                <ng-container matColumnDef="genre">
-                    <mat-header-cell *matHeaderCellDef> Genre </mat-header-cell>
-                    <mat-cell *matCellDef="let element">{{element.genre}} </mat-cell>
-                </ng-container>
-
-                <!-- Color Column -->
-                <ng-container matColumnDef="title">
-                    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
+    <div *ngIf="isStoryPage" class="row">
+        <div class="col-md-3">
+            <h1>{{parentStory.title}}</h1>
+            <p class="text-center">Page: {{parentStory.page + 1}}</p>
+        </div>
+        <div class="col-md-7">
+            <div class="summaryContainer storyText">{{parentStory.summary}}</div>
         </div>
     </div>
-    <div class="row form-group">
-        <div class="col-md-3 offset-md-9">
-            <button class="btn btn-primary" style="width: 100%" [routerLink]=" ['/newStory'] ">Create</button>
+
+    <div *ngIf="!isStoryPage" class="row">
+        <div class="col-md-3">
+            <h1>Story Board</h1>
+            <p class="text-center storyText">Stories Written by the Community</p>
+        </div>
+        <div class="col-md-7">
+            <div class="summaryContainer storyText">
+And as imagination bodies forth
+The forms of things unknown, the poet’s pen
+Turns them to shapes and gives to airy nothing
+A local habitation and a name.
+<span style="font-size: 0.7em">William Shakespeare (A Midsummer Night’s Dream)</span></div>
+        </div>
+    </div>
+    <hr>
+    <div *ngIf="!noStories">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <mat-table #table [dataSource]="dataSource">
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="score">
+                        <mat-header-cell *matHeaderCellDef> Score </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.score}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="author">
+                        <mat-header-cell *matHeaderCellDef> Author </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.author}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="genre">
+                        <mat-header-cell *matHeaderCellDef> Genre </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.genre}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row [ngClass]="hoverRow" *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></mat-row>
+                </mat-table>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-3 offset-md-9">
+                <button class="btn btn-primary" style="width: 100%" (click)="write()">Create</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="noStories">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center">The End.</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <p class="text-muted text-center">It looks like no one has written a page here. Add you're creativity to this story.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <button class="btn btn-primary" style="width: 100%" (click)="write()">Create</button>
+            </div>
         </div>
     </div>
 

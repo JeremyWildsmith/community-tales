@@ -1,3 +1,54 @@
-<p>
-  read-story-page works!
-</p>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="row">
+            <div class="col-md-9">
+                <h3 class="text-center">{{currentStory.title}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <h4 class="text-center">Page {{currentStory.page}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="storyContainer">
+                            <p class="storyFont">{{currentStory.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <form>
+                    <div class="form-group">
+                        <label for="score">Score</label>
+                        <div class="input-group">
+                            <input type="text" [value]="currentStory.score" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="button">Like!</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input class="form-control" id="author" aria-describedby="emailHelp" [value]="currentStory.author" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <input class="form-control" id="genre" [value]="currentStory.genre" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input class="form-control" id="date" [value]="formattedDate" disabled>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="width: 100%" (click)="nextPage()">Next Page</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

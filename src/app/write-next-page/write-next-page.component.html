@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">Create Story</h1>
+            <h1 class="text-center">The Next Chapter</h1>
         </div>
     </div>
     <div class="row">
@@ -32,39 +32,14 @@
                         </div>
                     </div>
                 </mat-step>
-                <mat-step [stepControl]="detailsFormGroup">
-                    <ng-template matStepLabel>Describe your Story</ng-template>
-                    <div class="form-group">
-                        <label for="storyTitle">Title</label>
-                        <input [(ngModel)]="title" type="email" class="form-control" id="storyTitle" aria-describedby="titleHelp" placeholder="Enter a title">
-                        <small id="titleHelp" class="form-text text-muted">Enter a descriptive and enticing story name.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="storySummary">Summary</label>
-                        <textarea [(ngModel)]="summary" class="form-control" id="storyTitle" aria-describedby="titleHelp" placeholder="Enter a summary" rows="5"></textarea>
-                        <small id="titleHelp" class="form-text text-muted">Enter a summary of the over-all plot.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="genre">Genre</label>
-                        <select [(ngModel)]="genre" class="form-control">
-                            <option>Mystery</option>
-                            <option>Adventure</option>
-                            <option>Comedy</option>
-                            <option>Drama</option>
-                            <option>Horror</option>
-                        </select>
-                        <small id="genreHelp" class="form-text text-muted">Select the most appropriate genre for this story.</small>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 offset-md-8">
-                            <button type="submit" class="btn btn-primary" style="width: 100%" (click)="validateDescription(stepper)">Continue</button>
-                        </div>
-                    </div>
-                </mat-step>
                 <mat-step [stepControl]="secondFormGroup">
                     <ng-template matStepLabel>Write a Page</ng-template>
                     <div class="form-group">
-                        <label for="firstParagraph">Page One</label>
+                        <label for="title">Title</label>
+                        <input [value]="parentStory.title" class="form-control" id="title" aria-describedby="emailHelp" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstParagraph">New Page</label>
                         <textarea [(ngModel)]="paragraph" class="form-control" id="firstParagraph" aria-describedby="firstParagraphHelp" placeholder="Start your story here..." rows="8"></textarea>
                         <small id="firstParagraphHelp" class="form-text text-muted">Enter the first paragraph of this story, others can expand onto this story.</small>
                     </div>

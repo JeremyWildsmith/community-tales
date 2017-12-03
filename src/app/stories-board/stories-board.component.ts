@@ -22,6 +22,7 @@ export class StoriesBoardComponent implements OnInit {
 
     parentStory: Story = new Story();
 
+    isLoading = true;
 
     constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private storyService: StoryService, private router: Router, private route: ActivatedRoute) {
 
@@ -65,7 +66,7 @@ export class StoriesBoardComponent implements OnInit {
             });
 
             this.noStories = (s.length == 0);
-
+            setTimeout(() => {this.isLoading = false}, 1000);
             this.dataSource = new MatTableDataSource<Story>(s);
         });
     }

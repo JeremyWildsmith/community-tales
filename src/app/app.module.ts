@@ -4,13 +4,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {StoriesBoardComponent} from './stories-board/stories-board.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatCheckboxModule, MatCardModule, MatChipsModule, MatGridListModule, MatTableModule, MatIconModule, MatIconRegistry, MatToolbarModule, MatMenuModule, MatStepperModule} from '@angular/material';
+import {MatButtonModule, MatProgressSpinnerModule, MatFormFieldModule, MatCheckboxModule, MatCardModule, MatChipsModule, MatGridListModule, MatTableModule, MatIconModule, MatIconRegistry, MatToolbarModule, MatMenuModule, MatStepperModule} from '@angular/material';
 import {SideNavComponent} from './side-nav/side-nav.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {ErrorPageNotFoundComponent} from './error-page-not-found/error-page-not-found.component';
 import {CreateStoryPageComponent} from './create-story-page/create-story-page.component';
 import {MatInputModule} from '@angular/material';
-import {HttpClientModule} from '@angular/common/http';
 import {StoryService} from "./story.service";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ReadStoryPageComponent} from './read-story-page/read-story-page.component';
@@ -21,6 +20,12 @@ import {AngularFireModule} from 'angularfire2';
 // New imports to update based on AngularFire2 version 4
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
+
+import {AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ShareButtonsModule } from 'ngx-sharebuttons';
+import { LoadingPageComponent } from './loading-page/loading-page.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDIvmUoX7NSZviYobDrrriYxVLC36lAzTU",
@@ -69,6 +74,7 @@ const appRoutes: Routes = [
         CreateStoryPageComponent,
         ReadStoryPageComponent,
         WriteNextPageComponent,
+        LoadingPageComponent,
     ],
     imports: [
         RouterModule.forRoot(
@@ -91,9 +97,12 @@ const appRoutes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        AngularFirestoreModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFireDatabaseModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        HttpClientJsonpModule,
+        MatProgressSpinnerModule,
     ],
     providers: [StoryService],
     bootstrap: [AppComponent]

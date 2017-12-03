@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {AngularFireDatabase} from 'angularfire2/database';
+import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs/Observable';
 
@@ -24,7 +24,7 @@ export class Story {
 export class StoryService {
     readonly URL_BASE: string = "https://communitytales-39909.firebaseio.com";
 
-    constructor(private http: HttpClient, private db: AngularFireDatabase, private auth: AngularFireAuth) {}
+    constructor(private http: HttpClient, private db: AngularFireDatabase, private auth: AngularFireAuth, private afs: AngularFirestore) {}
 
     public getStoriesStream(filter?: string): Observable<Story[]> {
 
@@ -51,6 +51,10 @@ export class StoryService {
         });
 
         return o;
+    }
+    
+    public getStoryStream(id : string) : AngularFireObject<Story> {
+        return this.db.object<Story>("/posts/" + id);
     }
 
     public getStories(filter: string): Promise<Array<Story>> {

@@ -1,5 +1,8 @@
+<div *ngIf="isLoading">
+    <app-loading-page></app-loading-page>
+</div>
 
-<div class="row">
+<div *ngIf="!isLoading" class="row">
     <div class="col-md-10 offset-md-1">
         <div class="row">
             <div class="col-md-9">
@@ -27,8 +30,8 @@
                         <label for="score">Score</label>
                         <div class="input-group">
                             <input type="text" [value]="currentStory.score" class="form-control">
-                            <span class="input-group-btn">
-                                <button class="btn btn-success" type="button">Like!</button>
+                            <span class="input-group-btn" *ngIf="!liked">
+                                <button class="btn btn-success" type="button" (click)="like()">Like!</button>
                             </span>
                         </div>
                     </div>
@@ -46,6 +49,12 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary" style="width: 100%" (click)="nextPage()">Next Page</button>
+                    </div>
+                    <div class="form-group" *ngIf="currentStory.parent != null">
+                        <button type="submit" class="btn btn-default" style="width: 100%" (click)="previousPage()">Previous Page</button>
+                    </div>
+                    <div class="form-group" *ngIf="currentStory.parent == null">
+                        <button type="submit" class="btn btn-default" style="width: 100%" (click)="storyBoard()">Story Board</button>
                     </div>
                 </form>
             </div>

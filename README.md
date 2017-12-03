@@ -6,16 +6,16 @@ This is a CMS for user-based stories. Users have the ability to write the first 
 
 This platform's front-end is written in typescript using Angular 4. The back-end is entirely driven by Firebase.
 
-##Demo
+## Demo
 A demo of this project is visible at the following URL:
 http://jeremywildsmith.com/community-tales/community-tales/dist/home/all
 
-##Screen-Shots
+## Screen-Shots
 ![Stories Board - Index](https://imgur.com/QhdnIFg.jpg)
 ![Create new Story](https://imgur.com/6pfzoqb.jpg)
 ![Read Story Page](https://imgur.com/6RZKJbJ.jpg)
 
-##License
+## License
 The code for this project is licensed under MIT License, making it free and open for commercial and non-commercial use.
 
 

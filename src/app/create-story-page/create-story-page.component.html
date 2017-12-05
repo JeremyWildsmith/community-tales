@@ -6,6 +6,13 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="alert alert-danger" *ngIf="errorDescription.length > 0">
+                <strong>Error:</strong> {{errorDescription}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <mat-horizontal-stepper #stepper linear>
                 <mat-step [stepControl]="firstFormGroup">
@@ -37,12 +44,12 @@
                     <div class="form-group">
                         <label for="storyTitle">Title</label>
                         <input [(ngModel)]="title" type="email" class="form-control" id="storyTitle" aria-describedby="titleHelp" placeholder="Enter a title">
-                        <small id="titleHelp" class="form-text text-muted">Enter a descriptive and enticing story name.</small>
+                        <small id="titleHelp" class="form-text text-muted">Enter a descriptive and enticing story name. <strong>Must be between 3 and 50 character.</strong></small>
                     </div>
                     <div class="form-group">
                         <label for="storySummary">Summary</label>
                         <textarea [(ngModel)]="summary" class="form-control" id="storyTitle" aria-describedby="titleHelp" placeholder="Enter a summary" rows="5"></textarea>
-                        <small id="titleHelp" class="form-text text-muted">Enter a summary of the over-all plot.</small>
+                        <small id="titleHelp" class="form-text text-muted">Enter a summary of the over-all plot. <strong>Must be between 10 and 400 character.</strong></small>
                     </div>
                     <div class="form-group">
                         <label for="genre">Genre</label>
@@ -66,7 +73,7 @@
                     <div class="form-group">
                         <label for="firstParagraph">Page One</label>
                         <textarea [(ngModel)]="paragraph" class="form-control" id="firstParagraph" aria-describedby="firstParagraphHelp" placeholder="Start your story here..." rows="8"></textarea>
-                        <small id="firstParagraphHelp" class="form-text text-muted">Enter the first paragraph of this story, others can expand onto this story.</small>
+                        <small id="firstParagraphHelp" class="form-text text-muted">Enter the first paragraph of this story, others can expand onto this story. <strong>Must be between 200 and 3000 character.</strong></small>
                     </div>
                     <div class="row">
                         <div class="col-md-4 offset-md-8">
@@ -88,7 +95,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4 offset-md-4">
-                            <button (click)="publishStory()" type="submit" class="btn btn-primary" style="width: 100%" matStepperNext>Publish!</button>
+                            <button (click)="publishStory(stepper)" type="submit" class="btn btn-primary" style="width: 100%" matStepperNext>Publish!</button>
                         </div>
                     </div>
                 </mat-step>

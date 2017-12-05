@@ -6,6 +6,13 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="alert alert-danger" *ngIf="errorDescription.length > 0">
+                <strong>Error:</strong> {{errorDescription}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <mat-horizontal-stepper #stepper linear>
                 <mat-step [stepControl]="firstFormGroup">
@@ -63,7 +70,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4 offset-md-4">
-                            <button (click)="publishStory()" type="submit" class="btn btn-primary" style="width: 100%" matStepperNext>Publish!</button>
+                            <button (click)="publishStory(stepper)" type="submit" class="btn btn-primary" style="width: 100%" matStepperNext>Publish!</button>
                         </div>
                     </div>
                 </mat-step>

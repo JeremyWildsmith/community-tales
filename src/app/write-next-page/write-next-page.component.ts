@@ -12,8 +12,9 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 export class WriteNextPageComponent implements OnInit {
     contactEmail: string = "";
-    paragraph: string;
+    paragraph: string = "";
     parentStory: Story = new Story();
+    errorDescription: string = "";
 
     constructor(private _formBuilder: FormBuilder, private storyService: StoryService, private router: Router, private route: ActivatedRoute) {
         this.parentStory.title = "";
@@ -34,21 +35,50 @@ export class WriteNextPageComponent implements OnInit {
     ngOnInit() {
 
     }
+    validateContact(stepper?: MatStepper) {
+        this.errorDescription = "";
 
-    validateContact(stepper: MatStepper) {
-        stepper.next();
-        return false;
+        let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (!emailRegex.test(this.contactEmail)) {
+            this.errorDescription = "Please enter a valid contact e-mail address.";
+            return false;
+        }
+
+        if (stepper != undefined)
+            stepper.next();
+
+        return true;
     }
 
-    validateDescription(stepper: MatStepper) {
-        stepper.next();
+    validateParagraph(stepper?: MatStepper) {
+        this.errorDescription = "";
+        
+        if (this.paragraph.length < 200 || this.paragraph.length > 3000) {
+            this.errorDescription = "Your page must be between 200 and 3000 characters long.";
+            return false;
+        }
+        
+        if (stepper != undefined)
+            stepper.next();
+
+        return true;
     }
 
-    validateParagraph(stepper: MatStepper) {
-        stepper.next();
-    }
 
-    publishStory() {
+    publishStory(stepper: MatStepper) {
+        
+        if (!this.validateContact()) {
+            stepper.previous();
+            stepper.previous();
+            return;
+        }
+        
+        if (!this.validateParagraph()) {
+            stepper.previous();
+            return;
+        }
+        
         let story = new Story();
         story.title = this.parentStory.title;
         story.author = this.contactEmail;
